@@ -1,4 +1,5 @@
-const path = require('path')
+const path = require('path');
+
 
 module.exports = {
   entry: path.join(__dirname, '/src/index.js'),
@@ -20,6 +21,14 @@ module.exports = {
         ]
       },
       {
+        test: /\.styl/,
+        use: [
+          'style-loader',
+          'css-loader',
+          'stylus-loader',
+        ]
+      },
+      {
         test: /\.(gif|jpg|jpeg|png|svg)$/,
         use: [
           {
@@ -33,4 +42,4 @@ module.exports = {
       }
     ]
   }
-}
+};
