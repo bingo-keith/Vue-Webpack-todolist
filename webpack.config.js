@@ -1,7 +1,11 @@
 const path = require('path');
+const HTMLPlugin = require('html-webpack-plugin');
+const webpack = require('webpack');
 
+const isDev = process.env.NODE_ENV === 'development';
 
-module.exports = {
+const config = {
+  target: 'web',
   entry: path.join(__dirname, '/src/index.js'),
   output: {
     filename: 'bundle.js',
@@ -35,11 +39,32 @@ module.exports = {
             loader: 'url-loader',
             options: {
               limit: 1024,
-              name: '[name]-aaa.[ext]'
+              name: '[name]-[hash].[ext]'
             }
           }
         ]
       }
     ]
-  }
+  },
+  plugins: [
+    // 利用该插件可以在js代码里调用node变量，同时可以利用该插件在编译时剔除调试代码
+    new webpack.DefinePlugin({
+      'process.env': {
+        NODE_ENV: isDev ? '"development"' : '"production"'
+      }
+    }),
+    new HTMLPlugin()
+  ]
 };
+
+if(isDev) {
+  config.devServer = {
+    port: '8000',
+    host: '0.0.0.0',
+    overlay: {
+      errors: true, // 把错误显示在页面上
+    }
+  }
+}
+
+module.exports = config;
