@@ -58,13 +58,25 @@ const config = {
 };
 
 if(isDev) {
+  config.devtool = '#cheap-module-eval-source-map';
   config.devServer = {
     port: '8000',
     host: '0.0.0.0',
     overlay: {
       errors: true, // 把错误显示在页面上
-    }
-  }
+    },
+    hot: true
+    // open: true,
+    // historyFallback: {
+    //
+    // }
+  };
+  config.plugins.push(
+    // 热加载
+    new webpack.HotModuleReplacementPlugin(),
+    // 减少不需要的信息展示
+    new webpack.NoEmitOnErrorsPlugin()
+  )
 }
 
 module.exports = config;

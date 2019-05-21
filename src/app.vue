@@ -1,5 +1,5 @@
 <template>
-  <div id="text">{{text}}</div>
+  <div id="test">{{text}}</div>
 </template>
 
 <script>
@@ -7,7 +7,7 @@
     name: "app",
     data() {
       return {
-        text: 'abc'
+        text: 'asdasd'
       }
     }
   }

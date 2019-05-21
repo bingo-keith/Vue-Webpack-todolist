@@ -1,4 +1,5 @@
 body {
     color: red;
     background-image: url('../images/money.jpg');
+    background-size: cover;
 }
